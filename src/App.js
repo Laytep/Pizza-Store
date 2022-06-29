@@ -1,7 +1,7 @@
 import React from 'react';
 import Categories from './components/Categories';
-import Content from './components/Content';
 import Header from './components/Header';
+import PizzaBlock from './components/PizzaBlock';
 import Sort from './components/Sort';
 import './scss/app.scss';
 
@@ -17,7 +17,16 @@ function App() {
               <Sort />
             </div>
             <h2 class="content__title">Все пиццы</h2>
-            <Content />
+            <div class="content__items">
+              <PizzaBlock />
+              <PizzaBlock />
+              <PizzaBlock />
+              <PizzaBlock />
+              <PizzaBlock />
+              <PizzaBlock />
+              <PizzaBlock />
+              <PizzaBlock />
+            </div>
           </div>
         </div>
       </div>
