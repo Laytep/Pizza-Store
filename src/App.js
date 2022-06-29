@@ -16,13 +16,14 @@ function App() {
               <Categories />
               <Sort />
             </div>
-            <h2 class="content__title">Все пиццы</h2>
+            <h2 class="content__title">Bestsellers</h2>
             <div class="content__items">
-              <PizzaBlock />
-              <PizzaBlock />
-              <PizzaBlock />
-              <PizzaBlock />
-              <PizzaBlock />
+              <PizzaBlock title="Chiken pizza" price={55} />
+              <PizzaBlock title="Cottage pizza" price={49} />
+              <PizzaBlock title="Kebab pizza" price={67} />
+            </div>
+            <h2 class="content__title">Hot deals</h2>
+            <div class="content__items">
               <PizzaBlock />
               <PizzaBlock />
               <PizzaBlock />
