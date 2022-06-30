@@ -1,0 +1,102 @@
+[
+    {
+      "id": 0,
+      "imageUrl": "https://dodopizza.azureedge.net/static/Img/Products/f035c7f46c0844069722f2bb3ee9f113_584x584.jpeg",
+      "title": "Pepperoni Fresh",
+      "types": [0, 1],
+      "sizes": [26, 30, 40],
+      "price": 803,
+      "category": 0,
+      "rating": 4
+    },
+    {
+      "id": 1,
+      "imageUrl": "https://dodopizza-a.akamaihd.net/static/Img/Products/61d6f99c33424d75a4f7bdfd5dcb0572_292x292.jpeg",
+      "title": "Margherita Classic",
+      "types": [0],
+      "sizes": [26, 40],
+      "price": 245,
+      "category": 0,
+      "rating": 6
+    },
+    {
+      "id": 2,
+      "imageUrl": "https://dodopizza-a.akamaihd.net/static/Img/Products/4c7f8ca9a48c49a9a1184fd4b36fefdf_292x292.jpeg",
+      "title": "Kurczak Ranch",
+      "types": [0],
+      "sizes": [26, 40],
+      "price": 295,
+      "category": 1,
+      "rating": 4
+    },
+    {
+      "id": 3,
+      "imageUrl": "https://dodopizza-a.akamaihd.net/static/Img/Products/52d981cf5a8948f1926937fe29ea4db6_292x292.jpeg",
+      "title": "Dodo Supreme",
+      "types": [1],
+      "sizes": [26, 30, 40],
+      "price": 275,
+      "category": 2,
+      "rating": 2
+    },
+    {
+      "id": 4,
+      "imageUrl": "https://dodopizza-a.akamaihd.net/static/Img/Products/577390b1a88e4556a061c281eeac75d7_292x292.jpeg",
+      "title": "Rukola & Pieczarki 🌱",
+      "types": [0, 1],
+      "sizes": [26, 30, 40],
+      "price": 415,
+      "category": 3,
+      "rating": 8
+    },
+    {
+      "id": 5,
+      "imageUrl": "https://dodopizza-a.akamaihd.net/static/Img/Products/d1c1a77565d24261a921aca6ee038722_292x292.jpeg",
+      "title": "Pepperoni Hot 🌶️",
+      "types": [0],
+      "sizes": [30, 40],
+      "price": 580,
+      "category": 2,
+      "rating": 2
+    },
+    {
+      "id": 6,
+      "imageUrl": "https://dodopizza.azureedge.net/static/Img/Products/Pizza/ru-RU/d2e337e9-e07a-4199-9cc1-501cc44cb8f8.jpg",
+      "title": "Pepperoni Classic",
+      "types": [0, 1],
+      "sizes": [26, 30, 40],
+      "price": 675,
+      "category": 1,
+      "rating": 9
+    },
+    {
+      "id": 7,
+      "imageUrl": "https://dodopizza-a.akamaihd.net/static/Img/Products/ecf9bcec54f24c0e83a36e7d75466951_292x292.jpeg",
+      "title": "Kurczak BBQ",
+      "types": [0, 1],
+      "sizes": [26, 30, 40],
+      "price": 450,
+      "category": 4,
+      "rating": 10
+    },
+    {
+      "id": 8,
+      "imageUrl": "https://dodopizza-a.akamaihd.net/static/Img/Products/8dd91b45451b4dd3bfe7556c7edbc325_292x292.jpeg",
+      "title": "Ekstra Mięsna",
+      "types": [0, 1],
+      "sizes": [26, 30, 40],
+      "price": 395,
+      "category": 5,
+      "rating": 10
+    },
+    {
+      "id": 9,
+      "imageUrl": "https://dodopizza-a.akamaihd.net/static/Img/Products/d1ff90d8f78e4e9ca27483c3b58bf8ef_292x292.jpeg",
+      "title": "Cztery sery 🌱",
+      "types": [0, 1],
+      "sizes": [26, 30, 40],
+      "price": 285,
+      "category": 5,
+      "rating": 7
+    }
+  ]
