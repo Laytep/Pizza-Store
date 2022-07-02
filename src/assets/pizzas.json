@@ -98,5 +98,15 @@
       "price": "44,90",
       "category": 5,
       "rating": 7
+    },
+    {
+      "id": 10,
+      "imageUrl": "https://dodopizza-a.akamaihd.net/static/Img/Products/20f9d59689dd483cb093b524504e6f1d_292x292.jpeg",
+      "title": "Double Pepperoni",
+      "types": [0, 1],
+      "sizes": [26, 30, 40],
+      "price": "54,90",
+      "category": 5,
+      "rating": 7
     }
   ]
