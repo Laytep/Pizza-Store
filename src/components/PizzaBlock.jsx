@@ -18,6 +18,7 @@ function PizzaBlock({ title, price, imageUrl, sizes, types }) {
         <ul>
           {types.map((typeId) => (
             <li
+              key={typeId}
               onClick={() => setActiveType(typeId)}
               className={activeType === typeId ? 'active' : ''}>
               {pizzaTypes[typeId]}
@@ -27,6 +28,7 @@ function PizzaBlock({ title, price, imageUrl, sizes, types }) {
         <ul>
           {sizes.map((size, index) => (
             <li
+              key={size}
               onClick={() => setActiveSize(index)}
               className={index === activeSize ? 'active' : ''}>
               {size} cm.
@@ -35,7 +37,7 @@ function PizzaBlock({ title, price, imageUrl, sizes, types }) {
         </ul>
       </div>
       <div className="pizza-block__bottom">
-        <div className="pizza-block__price">{price} zł</div>
+        <div className="pizza-block__price">od {price} zł</div>
         <button onClick={addPizzaButton} className="button button--outline button--add">
           <svg
             width="12"
@@ -48,7 +50,7 @@ function PizzaBlock({ title, price, imageUrl, sizes, types }) {
               fill="white"
             />
           </svg>
-          <span>Добавить</span>
+          <span>Wybierz</span>
           <i>{pizzaCount}</i>
         </button>
       </div>

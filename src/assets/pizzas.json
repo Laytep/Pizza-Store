@@ -5,7 +5,7 @@
       "title": "Pepperoni Fresh",
       "types": [0, 1],
       "sizes": [26, 30, 40],
-      "price": 803,
+      "price": "29,90",
       "category": 0,
       "rating": 4
     },
@@ -15,7 +15,7 @@
       "title": "Margherita Classic",
       "types": [0],
       "sizes": [26, 40],
-      "price": 245,
+      "price": "25,90",
       "category": 0,
       "rating": 6
     },
@@ -25,7 +25,7 @@
       "title": "Kurczak Ranch",
       "types": [0],
       "sizes": [26, 40],
-      "price": 295,
+      "price": "35,90",
       "category": 1,
       "rating": 4
     },
@@ -35,7 +35,7 @@
       "title": "Dodo Supreme",
       "types": [1],
       "sizes": [26, 30, 40],
-      "price": 275,
+      "price": "49,90",
       "category": 2,
       "rating": 2
     },
@@ -45,7 +45,7 @@
       "title": "Rukola & Pieczarki 🌱",
       "types": [0, 1],
       "sizes": [26, 30, 40],
-      "price": 415,
+      "price": "31,90",
       "category": 3,
       "rating": 8
     },
@@ -55,7 +55,7 @@
       "title": "Pepperoni Hot 🌶️",
       "types": [0],
       "sizes": [30, 40],
-      "price": 580,
+      "price": "38,90",
       "category": 2,
       "rating": 2
     },
@@ -65,7 +65,7 @@
       "title": "Pepperoni Classic",
       "types": [0, 1],
       "sizes": [26, 30, 40],
-      "price": 675,
+      "price": "38,90",
       "category": 1,
       "rating": 9
     },
@@ -75,7 +75,7 @@
       "title": "Kurczak BBQ",
       "types": [0, 1],
       "sizes": [26, 30, 40],
-      "price": 450,
+      "price": "41,90",
       "category": 4,
       "rating": 10
     },
@@ -85,7 +85,7 @@
       "title": "Ekstra Mięsna",
       "types": [0, 1],
       "sizes": [26, 30, 40],
-      "price": 395,
+      "price": "44,90",
       "category": 5,
       "rating": 10
     },
@@ -95,7 +95,17 @@
       "title": "Cztery sery 🌱",
       "types": [0, 1],
       "sizes": [26, 30, 40],
-      "price": 285,
+      "price": "44,90",
+      "category": 5,
+      "rating": 7
+    },
+    {
+      "id": 10,
+      "imageUrl": "https://dodopizza-a.akamaihd.net/static/Img/Products/20f9d59689dd483cb093b524504e6f1d_292x292.jpeg",
+      "title": "Double Pepperoni",
+      "types": [0, 1],
+      "sizes": [26, 30, 40],
+      "price": "54,90",
       "category": 5,
       "rating": 7
     }
