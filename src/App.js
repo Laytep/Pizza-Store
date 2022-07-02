@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Categories from './components/Categories';
 import Header from './components/Header';
 import PizzaBlock from './components/PizzaBlock';
@@ -8,11 +8,13 @@ import './scss/app.scss';
 function App() {
   const [items, setItems] = useState([]);
 
-  fetch('https://62c02a12c134cf51ceca3b76.mockapi.io/Items')
-    .then((res) => {
-      return res.json();
-    })
-    .then((json) => setItems(json));
+  useEffect(() => {
+    fetch('https://62c02a12c134cf51ceca3b76.mockapi.io/Items')
+      .then((res) => {
+        return res.json();
+      })
+      .then((json) => setItems(json));
+  }, []);
 
   return (
     <div className="App">
