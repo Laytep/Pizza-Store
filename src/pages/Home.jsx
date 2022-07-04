@@ -15,10 +15,11 @@ const Home = () => {
       })
       .then((json) => setItems(json))
       .then(() => setIsLoading(false));
+    window.scrollTo(0, 0);
   }, []);
 
   return (
-    <>
+    <div className="container">
       <div className="content__top">
         <Categories />
         <Sort />
@@ -40,7 +41,7 @@ const Home = () => {
       </div>
       <h2 className="content__title">Hot deals</h2>
       <div className="content__items"></div>
-    </>
+    </div>
   );
 };
 
