@@ -24,7 +24,10 @@ body {
   padding: 40px 0;
 
   &__title {
-    margin: 35px 0;
+    font-weight: 800;
+    font-size: 38px;
+    margin-top: 60px;
+    margin-bottom: 50px;
   }
 
   &__items {
@@ -54,7 +57,7 @@ body {
     @media (max-width: 1140px) {
       .categories {
         width: 100%;
-        overflow: scroll;
+        overflow: auto;
 
         ul {
           width: 785px;
