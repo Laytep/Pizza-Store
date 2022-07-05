@@ -8,17 +8,28 @@ const Home = () => {
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [activeCategories, setActiveCategories] = useState(0);
-  const [selectedSort, setSelectedSort] = useState(0);
+  const [selectedSort, setSelectedSort] = useState({
+    name: 'rating',
+    sortProperty: 'rating',
+  });
 
   useEffect(() => {
-    fetch('https://62c02a12c134cf51ceca3b76.mockapi.io/Items')
+    setIsLoading(true);
+
+    const order = selectedSort.sortProperty.includes('-') ? 'asc' : 'desc';
+    const sortBy = selectedSort.sortProperty.replace('-', '');
+    const category = activeCategories > 0 ? `category=${activeCategories}` : '';
+
+    fetch(
+      `https://62c02a12c134cf51ceca3b76.mockapi.io/Items?${category}&sortBy=${sortBy}&order=${order}`,
+    )
       .then((res) => {
         return res.json();
       })
       .then((json) => setItems(json))
       .then(() => setIsLoading(false));
     window.scrollTo(0, 0);
-  }, []);
+  }, [activeCategories, selectedSort]);
 
   return (
     <div className="container">
