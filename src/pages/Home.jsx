@@ -7,6 +7,8 @@ import Sort from '../components/Sort';
 const Home = () => {
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [activeCategories, setActiveCategories] = useState(0);
+  const [selectedSort, setSelectedSort] = useState(0);
 
   useEffect(() => {
     fetch('https://62c02a12c134cf51ceca3b76.mockapi.io/Items')
@@ -21,8 +23,8 @@ const Home = () => {
   return (
     <div className="container">
       <div className="content__top">
-        <Categories />
-        <Sort />
+        <Categories id={activeCategories} setId={(id) => setActiveCategories(id)} />
+        <Sort selected={selectedSort} setSelected={(id) => setSelectedSort(id)} />
       </div>
       <h2 className="content__title">Bestsellers</h2>
       <div className="content__items">
