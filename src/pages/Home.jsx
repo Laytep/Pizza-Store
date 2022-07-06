@@ -4,7 +4,7 @@ import PizzaBlock from '../components/PizzaBlock';
 import MyLoader from '../components/PizzaBlock/Loader';
 import Sort from '../components/Sort';
 
-const Home = () => {
+const Home = ({ searchValue, setSearchValue }) => {
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [activeCategories, setActiveCategories] = useState(0);
@@ -31,6 +31,26 @@ const Home = () => {
     window.scrollTo(0, 0);
   }, [activeCategories, selectedSort]);
 
+  const skeletons = [...new Array(8)].map((_, index) => <MyLoader key={index} />);
+  const pizzas = items
+    .filter((obj) => {
+      if (obj.title.toLowerCase().includes(searchValue.toLowerCase())) {
+        return true;
+      }
+
+      return false;
+    })
+    .map((obj) => (
+      <PizzaBlock
+        key={obj.id}
+        title={obj.title}
+        price={obj.price}
+        imageUrl={obj.imageUrl}
+        sizes={obj.sizes}
+        types={obj.types}
+      />
+    ));
+
   return (
     <div className="container">
       <div className="content__top">
@@ -38,20 +58,7 @@ const Home = () => {
         <Sort selected={selectedSort} setSelected={(id) => setSelectedSort(id)} />
       </div>
       <h2 className="content__title">Bestsellers</h2>
-      <div className="content__items">
-        {isLoading
-          ? [...new Array(8)].map((_, index) => <MyLoader key={index} />)
-          : items.map((obj) => (
-              <PizzaBlock
-                key={obj.id}
-                title={obj.title}
-                price={obj.price}
-                imageUrl={obj.imageUrl}
-                sizes={obj.sizes}
-                types={obj.types}
-              />
-            ))}
-      </div>
+      <div className="content__items">{isLoading ? skeletons : pizzas}</div>
       <h2 className="content__title">Hot deals</h2>
       <div className="content__items"></div>
     </div>
