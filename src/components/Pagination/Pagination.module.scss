@@ -1,9 +1,6 @@
 .pagination {
   li {
     display: inline-block;
-    &.selected {
-      color: #fe5f1e;
-    }
 
     a {
       display: inline-block;
@@ -23,9 +20,12 @@
       }
     }
   }
-  //   :global {
-  //     .previous {
-  //       background-color: red;
-  //     }
-  //   }
+  :global {
+    .selected {
+      a {
+        background-color: #fe5f1e;
+        color: #fff;
+      }
+    }
+  }
 }
