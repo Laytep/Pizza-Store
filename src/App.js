@@ -11,7 +11,6 @@ const SearchContext = createContext('');
 function App() {
   const [searchValue, setSearchValue] = useState('');
 
-  console.log(searchValue);
   return (
     <div className="App">
       <div className="wrapper">
