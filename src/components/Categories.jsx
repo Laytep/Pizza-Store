@@ -1,5 +1,4 @@
 function Categories({ id, onChangeCategory }) {
-  console.log(id);
   const categories = ['All', 'Meat', 'Vegan', 'Grill', 'Spicy', 'Closed'];
 
   return (
