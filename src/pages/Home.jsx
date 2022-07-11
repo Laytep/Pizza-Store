@@ -11,17 +11,14 @@ import MyLoader from '../components/PizzaBlock/Loader';
 import Sort from '../components/Sort';
 
 const Home = () => {
-  const categoryId = useSelector((state) => state.filter.categoryId);
+  const { categoryId, sort } = useSelector((state) => state.filter);
   const dispatch = useDispatch();
 
   const { searchValue } = useContext(SearchContext);
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
-  const [selectedSort, setSelectedSort] = useState({
-    name: 'rating',
-    sortProperty: 'rating',
-  });
+  const selectedSort = sort.sortProperty;
 
   const onChangeCategory = (id) => {
     dispatch(setCategoryId(id));
@@ -30,8 +27,8 @@ const Home = () => {
   useEffect(() => {
     setIsLoading(true);
 
-    const order = selectedSort.sortProperty.includes('-') ? 'asc' : 'desc';
-    const sortBy = selectedSort.sortProperty.replace('-', '');
+    const order = selectedSort.includes('-') ? 'asc' : 'desc';
+    const sortBy = selectedSort.replace('-', '');
     const category = categoryId > 0 ? `category=${categoryId}` : '';
     const search = searchValue ? `&search=${searchValue}` : '';
 
@@ -72,7 +69,7 @@ const Home = () => {
     <div className="container">
       <div className="content__top">
         <Categories id={categoryId} onChangeCategory={onChangeCategory} />
-        <Sort selected={selectedSort} setSelected={(id) => setSelectedSort(id)} />
+        <Sort />
       </div>
       <h2 className="content__title">Bestsellers</h2>
       <div className="content__items">{isLoading ? skeletons : pizzas}</div>
