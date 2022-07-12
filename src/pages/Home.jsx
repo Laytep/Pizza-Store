@@ -9,6 +9,7 @@ import Pagination from '../components/Pagination';
 import PizzaBlock from '../components/PizzaBlock';
 import MyLoader from '../components/PizzaBlock/Loader';
 import Sort from '../components/Sort';
+import axios from 'axios';
 
 const Home = () => {
   const { categoryId, sort } = useSelector((state) => state.filter);
@@ -32,16 +33,26 @@ const Home = () => {
     const category = categoryId > 0 ? `category=${categoryId}` : '';
     const search = searchValue ? `&search=${searchValue}` : '';
 
-    fetch(
-      `https://62c02a12c134cf51ceca3b76.mockapi.io/Items?page=${currentPage}&limit=8&${category}&sortBy=${sortBy}&order=${order}${search}`,
-    )
+    // fetch(
+    //   `https://62c02a12c134cf51ceca3b76.mockapi.io/Items?page=${currentPage}&limit=8&${category}&sortBy=${sortBy}&order=${order}${search}`,
+    // )
+    //   .then((res) => {
+    //     return res.json();
+    //   })
+    //   .then((json) => {
+    //     setItems(json);
+    //   })
+    //   .then(() => setIsLoading(false));
+
+    axios
+      .get(
+        `https://62c02a12c134cf51ceca3b76.mockapi.io/Items?page=${currentPage}&limit=8&${category}&sortBy=${sortBy}&order=${order}${search}`,
+      )
       .then((res) => {
-        return res.json();
-      })
-      .then((json) => {
-        setItems(json);
-      })
-      .then(() => setIsLoading(false));
+        setItems(res.data);
+        setIsLoading(false);
+      });
+
     window.scrollTo(0, 0);
   }, [categoryId, selectedSort, searchValue, currentPage]);
 
