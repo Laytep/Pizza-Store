@@ -26,7 +26,7 @@ const cartSlice = createSlice({
       }, 0);
     },
     removeItem(state, action) {
-      state.items.filter((obj) => obj.id === action.payload);
+      state.items = state.items.filter((obj) => obj.id !== action.payload);
     },
     clearItems(state) {
       state.items = [];
@@ -34,7 +34,9 @@ const cartSlice = createSlice({
     itemCountDecrement(state, action) {
       const findItem = state.items.find((obj) => obj.id === action.payload);
 
-      if (findItem) {
+      if (findItem.count <= 1) {
+        state.items = state.items.filter((obj) => obj.id !== action.payload);
+      } else if (findItem) {
         findItem.count--;
       }
       state.totalPrice = state.items.reduce((sum, obj) => {
