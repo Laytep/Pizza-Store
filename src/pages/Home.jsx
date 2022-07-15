@@ -12,6 +12,7 @@ import Pagination from '../components/Pagination';
 import PizzaBlock from '../components/PizzaBlock';
 import MyLoader from '../components/PizzaBlock/Loader';
 import Sort, { list } from '../components/Sort';
+import { useCallback } from 'react';
 
 const Home = () => {
   const { categoryId, sort, currentPage } = useSelector((state) => state.filter);
@@ -25,9 +26,12 @@ const Home = () => {
   const [isLoading, setIsLoading] = useState(true);
   const selectedSort = sort.sortProperty;
 
-  const onChangeCategory = (id) => {
-    dispatch(setCategoryId(id));
-  };
+  const onChangeCategory = useCallback(
+    (id) => {
+      dispatch(setCategoryId(id));
+    },
+    [dispatch],
+  );
 
   const onChangePage = (number) => {
     dispatch(setCurrentPage(number));
@@ -38,7 +42,7 @@ const Home = () => {
 
     const sortBy = selectedSort.replace('-', '');
     const order = selectedSort.includes('-') ? 'asc' : 'desc';
-    const category = categoryId > 0 ? `category=${categoryId}` : '';
+    const category = categoryId > 0 ? `category=${categoryId}` : ``;
 
     //If you need to add search in get req, add ${search} to .get, and update useEffect
     //const search = searchValue ? `&search=${searchValue}` : '';
@@ -61,12 +65,11 @@ const Home = () => {
         categoryId,
         currentPage,
       });
-      console.log(sort.sortProperty);
 
       navigate(`?${queryString}`);
     }
     isMounted.current = true;
-  }, [categoryId, sort.sortProperty, currentPage]);
+  }, [categoryId, sort.sortProperty, currentPage, navigate]);
 
   // if there was a first render, we check URL-param and save in redux
   useEffect(() => {
@@ -88,7 +91,7 @@ const Home = () => {
     }
 
     isSearch.current = false;
-  }, [categoryId, selectedSort, currentPage]);
+  }, [categoryId, sort.sortProperty, currentPage]);
 
   const skeletons = [...new Array(8)].map((_, index) => <MyLoader key={index} />);
 
