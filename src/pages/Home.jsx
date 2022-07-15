@@ -24,7 +24,6 @@ const Home = () => {
   const { searchValue } = useContext(SearchContext);
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const selectedSort = sort.sortProperty;
 
   const onChangeCategory = useCallback(
     (id) => {
@@ -35,26 +34,6 @@ const Home = () => {
 
   const onChangePage = (number) => {
     dispatch(setCurrentPage(number));
-  };
-
-  const fetchPizzas = () => {
-    setIsLoading(true);
-
-    const sortBy = selectedSort.replace('-', '');
-    const order = selectedSort.includes('-') ? 'asc' : 'desc';
-    const category = categoryId > 0 ? `category=${categoryId}` : ``;
-
-    //If you need to add search in get req, add ${search} to .get, and update useEffect
-    //const search = searchValue ? `&search=${searchValue}` : '';
-
-    axios
-      .get(
-        `https://62c02a12c134cf51ceca3b76.mockapi.io/Items?page=${currentPage}&limit=8&${category}&sortBy=${sortBy}&order=${order}`,
-      )
-      .then((res) => {
-        setItems(res.data);
-        setIsLoading(false);
-      });
   };
 
   //Check first render
@@ -80,13 +59,35 @@ const Home = () => {
       dispatch(setFilters({ ...params, sort }));
       isSearch.current = true;
     }
-  }, []);
+  }, [dispatch]);
 
   //if there was a first render, we fetch Pizzas
   useEffect(() => {
     window.scrollTo(0, 0);
 
     if (!isSearch.current) {
+      const selectedSort = sort.sortProperty;
+
+      const fetchPizzas = () => {
+        setIsLoading(true);
+
+        const sortBy = selectedSort.replace('-', '');
+        const order = selectedSort.includes('-') ? 'asc' : 'desc';
+        const category = categoryId > 0 ? `category=${categoryId}` : ``;
+
+        //If you need to add search in get req, add ${search} to .get, and update useEffect
+        //const search = searchValue ? `&search=${searchValue}` : '';
+
+        axios
+          .get(
+            `https://62c02a12c134cf51ceca3b76.mockapi.io/Items?page=${currentPage}&limit=8&${category}&sortBy=${sortBy}&order=${order}`,
+          )
+          .then((res) => {
+            setItems(res.data);
+            setIsLoading(false);
+          });
+      };
+
       fetchPizzas();
     }
 
@@ -105,7 +106,8 @@ const Home = () => {
     })
     .map((obj) => (
       <PizzaBlock
-        key={obj.id}
+        key={obj.id + obj.title}
+        id={obj.id}
         title={obj.title}
         price={obj.price}
         imageUrl={obj.imageUrl}
