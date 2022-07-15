@@ -12,6 +12,7 @@ import Pagination from '../components/Pagination';
 import PizzaBlock from '../components/PizzaBlock';
 import MyLoader from '../components/PizzaBlock/Loader';
 import Sort, { list } from '../components/Sort';
+import { useCallback } from 'react';
 
 const Home = () => {
   const { categoryId, sort, currentPage } = useSelector((state) => state.filter);
@@ -23,34 +24,16 @@ const Home = () => {
   const { searchValue } = useContext(SearchContext);
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const selectedSort = sort.sortProperty;
 
-  const onChangeCategory = (id) => {
-    dispatch(setCategoryId(id));
-  };
+  const onChangeCategory = useCallback(
+    (id) => {
+      dispatch(setCategoryId(id));
+    },
+    [dispatch],
+  );
 
   const onChangePage = (number) => {
     dispatch(setCurrentPage(number));
-  };
-
-  const fetchPizzas = () => {
-    setIsLoading(true);
-
-    const sortBy = selectedSort.replace('-', '');
-    const order = selectedSort.includes('-') ? 'asc' : 'desc';
-    const category = categoryId > 0 ? `category=${categoryId}` : '';
-
-    //If you need to add search in get req, add ${search} to .get, and update useEffect
-    //const search = searchValue ? `&search=${searchValue}` : '';
-
-    axios
-      .get(
-        `https://62c02a12c134cf51ceca3b76.mockapi.io/Items?page=${currentPage}&limit=8&${category}&sortBy=${sortBy}&order=${order}`,
-      )
-      .then((res) => {
-        setItems(res.data);
-        setIsLoading(false);
-      });
   };
 
   //Check first render
@@ -61,12 +44,11 @@ const Home = () => {
         categoryId,
         currentPage,
       });
-      console.log(sort.sortProperty);
 
       navigate(`?${queryString}`);
     }
     isMounted.current = true;
-  }, [categoryId, sort.sortProperty, currentPage]);
+  }, [categoryId, sort.sortProperty, currentPage, navigate]);
 
   // if there was a first render, we check URL-param and save in redux
   useEffect(() => {
@@ -77,18 +59,40 @@ const Home = () => {
       dispatch(setFilters({ ...params, sort }));
       isSearch.current = true;
     }
-  }, []);
+  }, [dispatch]);
 
   //if there was a first render, we fetch Pizzas
   useEffect(() => {
     window.scrollTo(0, 0);
 
     if (!isSearch.current) {
+      const selectedSort = sort.sortProperty;
+
+      const fetchPizzas = () => {
+        setIsLoading(true);
+
+        const sortBy = selectedSort.replace('-', '');
+        const order = selectedSort.includes('-') ? 'asc' : 'desc';
+        const category = categoryId > 0 ? `category=${categoryId}` : ``;
+
+        //If you need to add search in get req, add ${search} to .get, and update useEffect
+        //const search = searchValue ? `&search=${searchValue}` : '';
+
+        axios
+          .get(
+            `https://62c02a12c134cf51ceca3b76.mockapi.io/Items?page=${currentPage}&limit=8&${category}&sortBy=${sortBy}&order=${order}`,
+          )
+          .then((res) => {
+            setItems(res.data);
+            setIsLoading(false);
+          });
+      };
+
       fetchPizzas();
     }
 
     isSearch.current = false;
-  }, [categoryId, selectedSort, currentPage]);
+  }, [categoryId, sort.sortProperty, currentPage]);
 
   const skeletons = [...new Array(8)].map((_, index) => <MyLoader key={index} />);
 
@@ -102,7 +106,8 @@ const Home = () => {
     })
     .map((obj) => (
       <PizzaBlock
-        key={obj.id}
+        key={obj.id + obj.title}
+        id={obj.id}
         title={obj.title}
         price={obj.price}
         imageUrl={obj.imageUrl}
