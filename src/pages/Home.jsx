@@ -114,8 +114,15 @@ const Home = () => {
         <Sort />
       </div>
       <h2 className="content__title">Bestsellers</h2>
-      <div className="content__items">{isLoading === 'loading' ? skeletons : pizzas}</div>
-      <h2 className="content__title">Hot deals</h2>
+      {isLoading === 'error' ? (
+        <div class="content__error-info">
+          <h2>Loading error 😕</h2>
+          <p>Sorry, failed to get pizza</p>
+        </div>
+      ) : (
+        <div className="content__items">{isLoading === 'loading' ? skeletons : pizzas}</div>
+      )}
+
       <div className="content__items"></div>
       <Pagination currentPage={currentPage} onChangePage={onChangePage} />
     </div>
