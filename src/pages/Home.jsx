@@ -76,12 +76,7 @@ const Home = () => {
         //If you need to add search in get req, add ${search} to .get, and update useEffect
         //const search = searchValue ? `&search=${searchValue}` : '';
 
-        try {
-          dispatch(fetchPizzas({ sortBy, order, category, currentPage }));
-        } catch (error) {
-          console.log(error, 'Error Axios');
-          alert('Error when getting pizza');
-        }
+        dispatch(fetchPizzas({ sortBy, order, category, currentPage }));
       };
 
       getPizzas();

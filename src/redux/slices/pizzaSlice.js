@@ -29,6 +29,7 @@ const pizzaSlice = createSlice({
     [fetchPizzas.rejected]: (state) => {
       state.items = [];
       state.isLoading = 'error';
+      console.log('Error');
     },
   },
 });
