@@ -1,7 +1,6 @@
 import { useContext, useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import qs from 'qs';
 
 import { setCategoryId, setCurrentPage, setFilters } from '../redux/slices/filterSlice';
@@ -13,16 +12,17 @@ import PizzaBlock from '../components/PizzaBlock';
 import MyLoader from '../components/PizzaBlock/Loader';
 import Sort, { list } from '../components/Sort';
 import { useCallback } from 'react';
+import { fetchPizzas } from '../redux/slices/pizzaSlice';
 
 const Home = () => {
-  const { categoryId, sort, currentPage } = useSelector((state) => state.filter);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isSearch = useRef(false);
   const isMounted = useRef(false);
+  const { categoryId, sort, currentPage } = useSelector((state) => state.filter);
+  const items = useSelector((state) => state.pizza.items);
 
   const { searchValue } = useContext(SearchContext);
-  const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   const onChangeCategory = useCallback(
@@ -68,7 +68,7 @@ const Home = () => {
     if (!isSearch.current) {
       const selectedSort = sort.sortProperty;
 
-      const fetchPizzas = async () => {
+      const getPizzas = async () => {
         setIsLoading(true);
 
         const sortBy = selectedSort.replace('-', '');
@@ -79,10 +79,7 @@ const Home = () => {
         //const search = searchValue ? `&search=${searchValue}` : '';
 
         try {
-          const res = await axios.get(
-            `https://62c02a12c134cf51ceca3b76.mockapi.io/Items?page=${currentPage}&limit=8&${category}&sortBy=${sortBy}&order=${order}`,
-          );
-          setItems(res.data);
+          dispatch(fetchPizzas({ sortBy, order, category, currentPage }));
         } catch (error) {
           console.log(error, 'Error Axios');
           alert('Error when getting pizza');
@@ -91,7 +88,7 @@ const Home = () => {
         }
       };
 
-      fetchPizzas();
+      getPizzas();
     }
 
     isSearch.current = false;
