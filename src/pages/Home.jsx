@@ -68,7 +68,7 @@ const Home = () => {
     if (!isSearch.current) {
       const selectedSort = sort.sortProperty;
 
-      const fetchPizzas = () => {
+      const fetchPizzas = async () => {
         setIsLoading(true);
 
         const sortBy = selectedSort.replace('-', '');
@@ -78,14 +78,17 @@ const Home = () => {
         //If you need to add search in get req, add ${search} to .get, and update useEffect
         //const search = searchValue ? `&search=${searchValue}` : '';
 
-        axios
-          .get(
+        try {
+          const res = await axios.get(
             `https://62c02a12c134cf51ceca3b76.mockapi.io/Items?page=${currentPage}&limit=8&${category}&sortBy=${sortBy}&order=${order}`,
-          )
-          .then((res) => {
-            setItems(res.data);
-            setIsLoading(false);
-          });
+          );
+          setItems(res.data);
+        } catch (error) {
+          console.log(error, 'Error Axios');
+          alert('Error when getting pizza');
+        } finally {
+          setIsLoading(false);
+        }
       };
 
       fetchPizzas();
