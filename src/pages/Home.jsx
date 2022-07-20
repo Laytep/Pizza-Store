@@ -1,14 +1,15 @@
-import { useContext, useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import qs from 'qs';
 
 import { setCategoryId, setCurrentPage, setFilters } from '../redux/slices/filterSlice';
-
 import { SearchContext } from '../App';
+
 import Categories from '../components/Categories';
 import Pagination from '../components/Pagination';
 import PizzaBlock from '../components/PizzaBlock';
+
 import MyLoader from '../components/PizzaBlock/Loader';
 import Sort, { list } from '../components/Sort';
 import { useCallback } from 'react';
@@ -20,10 +21,9 @@ const Home = () => {
   const isSearch = useRef(false);
   const isMounted = useRef(false);
   const { categoryId, sort, currentPage } = useSelector((state) => state.filter);
-  const items = useSelector((state) => state.pizza.items);
+  const { items, isLoading } = useSelector((state) => state.pizza);
 
   const { searchValue } = useContext(SearchContext);
-  const [isLoading, setIsLoading] = useState(true);
 
   const onChangeCategory = useCallback(
     (id) => {
@@ -69,8 +69,6 @@ const Home = () => {
       const selectedSort = sort.sortProperty;
 
       const getPizzas = async () => {
-        setIsLoading(true);
-
         const sortBy = selectedSort.replace('-', '');
         const order = selectedSort.includes('-') ? 'asc' : 'desc';
         const category = categoryId > 0 ? `category=${categoryId}` : ``;
@@ -83,8 +81,6 @@ const Home = () => {
         } catch (error) {
           console.log(error, 'Error Axios');
           alert('Error when getting pizza');
-        } finally {
-          setIsLoading(false);
         }
       };
 
@@ -92,7 +88,7 @@ const Home = () => {
     }
 
     isSearch.current = false;
-  }, [categoryId, sort.sortProperty, currentPage]);
+  }, [categoryId, sort.sortProperty, currentPage, dispatch]);
 
   const skeletons = [...new Array(8)].map((_, index) => <MyLoader key={index} />);
 
@@ -123,7 +119,7 @@ const Home = () => {
         <Sort />
       </div>
       <h2 className="content__title">Bestsellers</h2>
-      <div className="content__items">{isLoading ? skeletons : pizzas}</div>
+      <div className="content__items">{isLoading === 'loading' ? skeletons : pizzas}</div>
       <h2 className="content__title">Hot deals</h2>
       <div className="content__items"></div>
       <Pagination currentPage={currentPage} onChangePage={onChangePage} />
