@@ -1,5 +1,7 @@
 # Getting Started with Create React App
 
+pizza-store-orpin.vercel.app
+
 Technology:
 - **ReactJS 18**
 - **TypeScript**
