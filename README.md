@@ -1,7 +1,7 @@
 # Getting Started with Create React App
 
 ## Page:
-[pizza-store-orpin.vercel.app](http://pizza-store-orpin.vercel.app)
+[pizza-store.app](http://pizza-store-orpin.vercel.app)
 
 ## Technology:
 - **ReactJS 18**
