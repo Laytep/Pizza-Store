@@ -3,7 +3,7 @@
 ## Page:
 [pizza-store-orpin.vercel.app](http://pizza-store-orpin.vercel.app)
 
-Technology:
+## Technology:
 - **ReactJS 18**
 - **TypeScript**
 - **Redux Toolkit** 
